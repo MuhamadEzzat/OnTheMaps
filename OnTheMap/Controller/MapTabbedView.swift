@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class MapTabbedView: UIViewController{
+class MapTabbedView: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var addBtn: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
@@ -17,6 +17,7 @@ class MapTabbedView: UIViewController{
     var locations = [Results]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: .done, target: self, action: #selector(self.logoutbutton))
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(named: "icon_addpin"), style: .done, target: self, action: #selector(self.addStudent)), UIBarButtonItem(image: UIImage(named: "icon_refresh"), style: .done, target: self, action: #selector(self.getData))]
         getData()
@@ -74,6 +75,7 @@ class MapTabbedView: UIViewController{
         OTMClient.getStudents { check, error, results in
             if check{
                 self.locations = results!.results!
+                print(self.locations.count, "PPPP")
                 DispatchQueue.main.async {
                     self.fillMapview()
                 }
@@ -129,7 +131,13 @@ class MapTabbedView: UIViewController{
     @objc func logoutbutton(){
         OTMClient.logout { check, error in
             if check {
-                print("Horrrrray")
+                DispatchQueue.main.async {
+                    guard let vc = self.presentingViewController else { return }
+
+                       while (vc.presentingViewController != nil) {
+                           vc.dismiss(animated: true, completion: nil)
+                       }
+                }
             }
         }
     }
@@ -137,7 +145,7 @@ class MapTabbedView: UIViewController{
     @IBAction func logoutBtn(_ sender: Any) {
         OTMClient.logout { check, error in
             if check {
-                print("Horrrrray")
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }

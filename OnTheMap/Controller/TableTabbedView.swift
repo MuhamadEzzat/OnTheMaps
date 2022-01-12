@@ -53,6 +53,13 @@ class TableTabbedView: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let app = UIApplication.shared
+        app.openURL(URL(string: locations[indexPath.row].mediaURL)!)
+                
+        tableView.deselectRow(at: indexPath, animated: true)
+        }
+    
     @objc func logoutbutton(){
         OTMClient.logout { check, error in
             if check {

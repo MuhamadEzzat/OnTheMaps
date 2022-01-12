@@ -167,7 +167,7 @@ class OTMClient {
     }
     
     class func getStudents(completion: @escaping (Bool, Error?, StudentsResults?) -> Void){
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?limit=100")!)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
           if error != nil { // Handle error...
