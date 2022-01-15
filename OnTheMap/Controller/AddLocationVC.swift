@@ -21,20 +21,15 @@ class AddLocationVC: UIViewController{
             UserDefaults.standard.set(addressTFf.text, forKey: "address")
             self.performSegue(withIdentifier: "openmap", sender: self)
         }else{
-            // Create the alert controller
              let alertController = UIAlertController(title: "Alert!", message: "Please fill the required fields", preferredStyle: .alert)
 
-             // Create the actions
             let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                  UIAlertAction in
                  NSLog("OK Pressed")
              }
              
-
-             // Add the actions
              alertController.addAction(okAction)
 
-             // Present the controller
              self.present(alertController, animated: true, completion: nil)
         }
         

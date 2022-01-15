@@ -27,14 +27,10 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         fillMapview()
-        
-
-        // Do any additional setup after loading the view.
     }
     
     func fillMapview(){
         getCoordinate(addressString: studentAddress ?? "") { coordinates, error in
-            print(coordinates.longitude, "popopwe", coordinates.latitude)
             
             self.latitudeMap = coordinates.latitude
             self.longitudeMap = coordinates.longitude
@@ -44,25 +40,21 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
         let lat = CLLocationDegrees(self.latitudeMap)
         let long = CLLocationDegrees(self.longitudeMap)
         
-        body = StudentLocationRequest(uniqueKey: uniqueKey, firstName: firstname, lastName: secondname, mapString: studentAddress, mediaURL: studentLink, latitude: lat, longitude: long)
+        self.body = StudentLocationRequest(uniqueKey: uniqueKey, firstName: firstname, lastName: secondname, mapString: studentAddress, mediaURL: studentLink, latitude: lat, longitude: long)
         
-        // The lat and long are used to create a CLLocationCoordinates2D instance.
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
         let first = self.firstname
         let last = self.secondname
         let mediaURL = self.studentLink
         
-        // Here we create the annotation and set its coordiate, title, and subtitle properties
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         annotation.title = "\(first) \(last)"
         annotation.subtitle = mediaURL
         
-        // Finally we place the annotation in an array of annotations.
         annotations.append(annotation)
         
-        // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
         
         
@@ -80,8 +72,7 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
                     let location = placemark.location!
                         
                     completionHandler(location.coordinate, nil)
-            
-                    return
+                    self.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: self.mapView.region.span), animated: true)
                 }
             }
                 
@@ -97,16 +88,5 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    /*
-    // MARK: - Navigation
-     @IBAction func finishBtn(_ sender: Any) {
-     }
-     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
