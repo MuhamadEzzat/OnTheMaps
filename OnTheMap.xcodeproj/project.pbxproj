@@ -24,6 +24,8 @@
 		4A48E768278DD6EF0027D2EE /* LogoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A48E767278DD6EF0027D2EE /* LogoutRequest.swift */; };
 		4A48E76A278DE11B0027D2EE /* StudentsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A48E769278DE11B0027D2EE /* StudentsResults.swift */; };
 		4A48E76C278DE1330027D2EE /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A48E76B278DE1330027D2EE /* Results.swift */; };
+		4AA237EB2792437900746FD5 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA237EA2792437900746FD5 /* ErrorHandling.swift */; };
+		4AA237ED279250C700746FD5 /* StudentLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA237EC279250C700746FD5 /* StudentLocationRequest.swift */; };
 		4AA775FF278E4C2800B5D97C /* AddLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA775FE278E4C2800B5D97C /* AddLocationVC.swift */; };
 		4AA77601278E4C6400B5D97C /* AddMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA77600278E4C6400B5D97C /* AddMapVC.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,8 @@
 		4A48E767278DD6EF0027D2EE /* LogoutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutRequest.swift; sourceTree = "<group>"; };
 		4A48E769278DE11B0027D2EE /* StudentsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsResults.swift; sourceTree = "<group>"; };
 		4A48E76B278DE1330027D2EE /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		4AA237EA2792437900746FD5 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
+		4AA237EC279250C700746FD5 /* StudentLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationRequest.swift; sourceTree = "<group>"; };
 		4AA775FE278E4C2800B5D97C /* AddLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationVC.swift; sourceTree = "<group>"; };
 		4AA77600278E4C6400B5D97C /* AddMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,7 @@
 				4A48E75A278DBDDE0027D2EE /* SessionData.swift */,
 				4A48E769278DE11B0027D2EE /* StudentsResults.swift */,
 				4A48E76B278DE1330027D2EE /* Results.swift */,
+				4AA237EA2792437900746FD5 /* ErrorHandling.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 				4A48E760278DC1FE0027D2EE /* UserDataRequest.swift */,
 				4A48E75E278DC1720027D2EE /* LoginRequest.swift */,
 				4A48E767278DD6EF0027D2EE /* LogoutRequest.swift */,
+				4AA237EC279250C700746FD5 /* StudentLocationRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -220,6 +226,7 @@
 				4A48E759278DBDD60027D2EE /* Account.swift in Sources */,
 				4A48E768278DD6EF0027D2EE /* LogoutRequest.swift in Sources */,
 				4A48E764278DD2350027D2EE /* MapTabbedView.swift in Sources */,
+				4AA237EB2792437900746FD5 /* ErrorHandling.swift in Sources */,
 				4AA775FF278E4C2800B5D97C /* AddLocationVC.swift in Sources */,
 				4A48E75D278DBFF40027D2EE /* OTMClient.swift in Sources */,
 				4A48E743278DB0660027D2EE /* LoginViewController.swift in Sources */,
@@ -228,6 +235,7 @@
 				4A48E76A278DE11B0027D2EE /* StudentsResults.swift in Sources */,
 				4AA77601278E4C6400B5D97C /* AddMapVC.swift in Sources */,
 				4A48E757278DBCB50027D2EE /* UserData.swift in Sources */,
+				4AA237ED279250C700746FD5 /* StudentLocationRequest.swift in Sources */,
 				4A48E75B278DBDDE0027D2EE /* SessionData.swift in Sources */,
 				4A48E76C278DE1330027D2EE /* Results.swift in Sources */,
 				4A48E741278DB0660027D2EE /* SceneDelegate.swift in Sources */,

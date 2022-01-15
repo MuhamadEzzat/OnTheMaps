@@ -8,8 +8,9 @@
 import UIKit
 import MapKit
 
-class AddMapVC: UIViewController {
+class AddMapVC: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     
     let studentAddress = UserDefaults.standard.string(forKey: "address")
@@ -19,12 +20,14 @@ class AddMapVC: UIViewController {
     let uniqueKey      = UserDefaults.standard.string(forKey: "uniqueKey")
     var latitudeMap  = 0.0
     var longitudeMap = 0.0
+    var body : StudentLocationRequest?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        mapView.delegate = self
         fillMapview()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -32,6 +35,7 @@ class AddMapVC: UIViewController {
     func fillMapview(){
         getCoordinate(addressString: studentAddress ?? "") { coordinates, error in
             print(coordinates.longitude, "popopwe", coordinates.latitude)
+            
             self.latitudeMap = coordinates.latitude
             self.longitudeMap = coordinates.longitude
         }
@@ -39,6 +43,8 @@ class AddMapVC: UIViewController {
         
         let lat = CLLocationDegrees(self.latitudeMap)
         let long = CLLocationDegrees(self.longitudeMap)
+        
+        body = StudentLocationRequest(uniqueKey: uniqueKey, firstName: firstname, lastName: secondname, mapString: studentAddress, mediaURL: studentLink, latitude: lat, longitude: long)
         
         // The lat and long are used to create a CLLocationCoordinates2D instance.
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -58,30 +64,36 @@ class AddMapVC: UIViewController {
         
         // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
+        
+        
     }
+    
     
     
     func getCoordinate( addressString : String,
             completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
         let geocoder = CLGeocoder()
+        loader.startAnimating()
         geocoder.geocodeAddressString(addressString) { (placemarks, error) in
             if error == nil {
                 if let placemark = placemarks?[0] {
                     let location = placemark.location!
                         
                     completionHandler(location.coordinate, nil)
+            
                     return
                 }
             }
                 
             completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
+            self.loader.stopAnimating()
         }
     }
 
     @IBAction func finishBtn(_ sender: Any) {
-        OTMClient.postNewMapAnnotation(uniqueKey: uniqueKey ?? "", firstName: firstname ?? "", lastName: secondname ?? "", mapString: studentAddress ?? "", mediaURL: studentLink ?? "", latitude: latitudeMap ?? 0.0, longitude: longitudeMap ?? 0.0) { check, error in
-            if check {
-                print("Yupeeee")
+        OTMClient.postNewMapAnnotation(studentbody: self.body!) { check, error in
+            if check == true{
+                print("horraaay")
             }
         }
     }

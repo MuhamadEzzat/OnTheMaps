@@ -132,20 +132,10 @@ class MapTabbedView: UIViewController, MKMapViewDelegate{
         OTMClient.logout { check, error in
             if check {
                 DispatchQueue.main.async {
-                    guard let vc = self.presentingViewController else { return }
-
-                       while (vc.presentingViewController != nil) {
-                           vc.dismiss(animated: true, completion: nil)
-                       }
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                    self.view.window?.rootViewController = viewController
                 }
-            }
-        }
-    }
-    
-    @IBAction func logoutBtn(_ sender: Any) {
-        OTMClient.logout { check, error in
-            if check {
-                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }

@@ -11,7 +11,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DeD-Zv-Pbb">
                                 <rect key="frame" x="80" y="343" width="254" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEC-14-TQS">
                                 <rect key="frame" x="80" y="413" width="254" height="45"/>
@@ -134,9 +134,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="LOGOUT"/>
                             </button>
-                            <connections>
-                                <action selector="logoutBtn:" destination="khC-HL-DWt" id="aMg-0t-ico"/>
-                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="icon_addpin" style="plain" id="SOB-5X-vul"/>
@@ -191,9 +188,6 @@
                                     <action selector="logoutBtn:" destination="Ncv-Ky-52U" eventType="touchUpInside" id="pLI-cg-vCX"/>
                                 </connections>
                             </button>
-                            <connections>
-                                <action selector="logoutBtn:" destination="Ncv-Ky-52U" id="VAq-eb-I3Q"/>
-                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" systemItem="add" id="eSA-FN-OKg"/>
@@ -347,7 +341,7 @@
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgJ-8U-wsL">
-                                <rect key="frame" x="80" y="752" width="254" height="45"/>
+                                <rect key="frame" x="80" y="703" width="254" height="45"/>
                                 <color key="backgroundColor" red="0.08235294118" green="0.55294117649999996" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="3nc-Ik-lLI"/>
@@ -360,21 +354,28 @@
                                     <action selector="finishBtn:" destination="WdL-QU-pew" eventType="touchUpInside" id="8q9-Od-dE4"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="7i7-a7-aoR">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="El2-Nl-Qvh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="El2-Nl-Qvh" firstAttribute="bottom" secondItem="jgJ-8U-wsL" secondAttribute="bottom" constant="16" id="1iT-i7-BJz"/>
+                            <constraint firstItem="7i7-a7-aoR" firstAttribute="centerY" secondItem="YWp-bW-pAy" secondAttribute="centerY" id="2bb-01-ENF"/>
                             <constraint firstItem="El2-Nl-Qvh" firstAttribute="trailing" secondItem="jgJ-8U-wsL" secondAttribute="trailing" constant="80" id="4nD-SF-KNJ"/>
                             <constraint firstItem="LDg-6x-Ns9" firstAttribute="leading" secondItem="El2-Nl-Qvh" secondAttribute="leading" id="8tZ-Vf-7fG"/>
                             <constraint firstItem="LDg-6x-Ns9" firstAttribute="top" secondItem="El2-Nl-Qvh" secondAttribute="top" id="IqN-vJ-MfN"/>
                             <constraint firstItem="jgJ-8U-wsL" firstAttribute="leading" secondItem="El2-Nl-Qvh" secondAttribute="leading" constant="80" id="d8V-BQ-QY9"/>
                             <constraint firstAttribute="bottom" secondItem="LDg-6x-Ns9" secondAttribute="bottom" id="hX5-cL-TLm"/>
                             <constraint firstItem="LDg-6x-Ns9" firstAttribute="trailing" secondItem="El2-Nl-Qvh" secondAttribute="trailing" id="l8u-u1-2ee"/>
+                            <constraint firstItem="7i7-a7-aoR" firstAttribute="centerX" secondItem="YWp-bW-pAy" secondAttribute="centerX" id="wYH-VL-g1f"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nt5-eL-rpX"/>
                     <connections>
+                        <outlet property="loader" destination="7i7-a7-aoR" id="jlb-Oi-HOo"/>
                         <outlet property="mapView" destination="LDg-6x-Ns9" id="rQF-f9-MEx"/>
                     </connections>
                 </viewController>
@@ -401,7 +402,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hXw-a5-t0d"/>
+        <segue reference="LMs-TO-RSI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

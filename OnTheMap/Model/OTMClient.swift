@@ -121,18 +121,6 @@ class OTMClient {
         task.resume()
     }
     
-//    class func createSessionId(completion: @escaping (Bool, Error?) -> Void) {
-//        let body = PostSession(requestToken: Auth.requestToken)
-//        taskForPOSTRequest(url: Endpoints.createSessionId.url, responseType: SessionResponse.self, body: body) { response, error in
-//            if let response = response {
-//                Auth.sessionId = response.sessionId
-//                completion(true, nil)
-//            } else {
-//                completion(false, nil)
-//            }
-//        }
-//    }
-//
     class func logout(completion: @escaping (Bool, Error?) -> Void) {
         let sessionid = String(describing: UserDefaults.standard.string(forKey: "sessionID")!)
         print(sessionid)
@@ -187,21 +175,35 @@ class OTMClient {
         task.resume()
     }
    
-    class func postNewMapAnnotation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (Bool, Error?) -> Void){
+    class func postNewMapAnnotation(studentbody: StudentLocationRequest, completion: @escaping (Bool, Error?) -> Void){
+        
+        var body = ["" :""].description.data(using: .utf8)
         
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody =
-        "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\", \"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\", \"latitude\": \"\(latitude)\", \"longitude\": \"\(longitude)\"}".data(using: .utf8)
+        request.httpBody = try! JSONEncoder().encode(studentbody)
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
           if error != nil { // Handle error…
               return
           }
-            print(response, "ooo")
-            completion(true, nil)
+            let decoder = JSONDecoder()
+            do{
+                let model = try decoder.decode(Results.self, from: data!)
+                if model.objectId != nil{
+                    completion(true, nil)
+                }else{
+                    let modelerror = try decoder.decode(ErrorHandling.self, from: data!)
+                    print(modelerror.error)
+                }
+                
+            }catch{
+                print(error.localizedDescription, "Error")
+            }
+
+            
           print(String(data: data!, encoding: .utf8)!)
         }
         task.resume()

@@ -63,17 +63,14 @@ class TableTabbedView: UIViewController, UITableViewDelegate, UITableViewDataSou
     @objc func logoutbutton(){
         OTMClient.logout { check, error in
             if check {
-                print("Horrrrray")
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                    self.view.window?.rootViewController = viewController
+                }
             }
         }
     }
     
-    @IBAction func logoutBtn(_ sender: Any) {
-        print("?W?W?W")
-        OTMClient.logout { check, error in
-            if check {
-                print("Horrrrray")
-            }
-        }
-    }
+  
 }
