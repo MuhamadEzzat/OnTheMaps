@@ -62,7 +62,6 @@ class MapTabbedView: UIViewController, MKMapViewDelegate{
         OTMClient.getStudents { check, error, results in
             if check{
                 self.locations = results!.results!
-                print(self.locations.count, "PPPP")
                 DispatchQueue.main.async {
                     self.fillMapview()
                 }
@@ -96,7 +95,9 @@ class MapTabbedView: UIViewController, MKMapViewDelegate{
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.openURL(URL(string: toOpen)!)
+                if let url = URL(string: toOpen){
+                    app.openURL(url)
+                }
             }
         }
     }

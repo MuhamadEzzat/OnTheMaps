@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A3315642794D89200A5A7B5 /* MapResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3315632794D89200A5A7B5 /* MapResult.swift */; };
+		4A3315662794E6EB00A5A7B5 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3315652794E6EB00A5A7B5 /* Reachability.swift */; };
 		4A48E73F278DB0660027D2EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A48E73E278DB0660027D2EE /* AppDelegate.swift */; };
 		4A48E741278DB0660027D2EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A48E740278DB0660027D2EE /* SceneDelegate.swift */; };
 		4A48E743278DB0660027D2EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A48E742278DB0660027D2EE /* LoginViewController.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A3315632794D89200A5A7B5 /* MapResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapResult.swift; sourceTree = "<group>"; };
+		4A3315652794E6EB00A5A7B5 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		4A48E73B278DB0660027D2EE /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A48E73E278DB0660027D2EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A48E740278DB0660027D2EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 				4A48E75A278DBDDE0027D2EE /* SessionData.swift */,
 				4A48E769278DE11B0027D2EE /* StudentsResults.swift */,
 				4A48E76B278DE1330027D2EE /* Results.swift */,
+				4A3315632794D89200A5A7B5 /* MapResult.swift */,
 				4AA237EA2792437900746FD5 /* ErrorHandling.swift */,
 			);
 			path = Model;
@@ -136,6 +141,7 @@
 		4A48E755278DB13A0027D2EE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4A3315652794E6EB00A5A7B5 /* Reachability.swift */,
 				4A48E747278DB0670027D2EE /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
@@ -228,6 +234,7 @@
 				4A48E764278DD2350027D2EE /* MapTabbedView.swift in Sources */,
 				4AA237EB2792437900746FD5 /* ErrorHandling.swift in Sources */,
 				4AA775FF278E4C2800B5D97C /* AddLocationVC.swift in Sources */,
+				4A3315642794D89200A5A7B5 /* MapResult.swift in Sources */,
 				4A48E75D278DBFF40027D2EE /* OTMClient.swift in Sources */,
 				4A48E743278DB0660027D2EE /* LoginViewController.swift in Sources */,
 				4A48E766278DD2410027D2EE /* TableTabbedView.swift in Sources */,
@@ -240,6 +247,7 @@
 				4A48E76C278DE1330027D2EE /* Results.swift in Sources */,
 				4A48E741278DB0660027D2EE /* SceneDelegate.swift in Sources */,
 				4A48E75F278DC1720027D2EE /* LoginRequest.swift in Sources */,
+				4A3315662794E6EB00A5A7B5 /* Reachability.swift in Sources */,
 				4A48E761278DC1FE0027D2EE /* UserDataRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -112,7 +112,6 @@ class OTMClient {
                 
             }catch{
                 completion(false, nil)
-                print(error.localizedDescription, "HEEEEH2")
             }
             
           
@@ -123,7 +122,6 @@ class OTMClient {
     
     class func logout(completion: @escaping (Bool, Error?) -> Void) {
         let sessionid = String(describing: UserDefaults.standard.string(forKey: "sessionID")!)
-        print(sessionid)
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "DELETE"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -145,7 +143,7 @@ class OTMClient {
                 
             }catch{
                 completion(false, nil)
-                print(error.localizedDescription, "HEEEEH2")
+                print(error.localizedDescription)
             }
             
           
@@ -166,7 +164,7 @@ class OTMClient {
             do{
                 let model = try decoder.decode(StudentsResults.self, from: data!)
                 completion(true, nil, model)
-                
+                print(model.results)
             }catch{
                 completion(false, nil, nil)
                 print(error.localizedDescription, "HEEEEH2")
@@ -189,9 +187,11 @@ class OTMClient {
           if error != nil { // Handle error…
               return
           }
+            print(response, "")
             let decoder = JSONDecoder()
             do{
-                let model = try decoder.decode(Results.self, from: data!)
+                let model = try decoder.decode(MapResult.self, from: data!)
+                
                 if model.objectId != nil{
                     completion(true, nil)
                 }else{
@@ -200,7 +200,7 @@ class OTMClient {
                 }
                 
             }catch{
-                print(error.localizedDescription, "Error")
+                print(error.localizedDescription)
             }
 
             

@@ -35,7 +35,6 @@ class TableTabbedView: UIViewController, UITableViewDelegate, UITableViewDataSou
                 DispatchQueue.main.async {
                     self.tbl.reloadData()
                 }
-                print("ELhamdulelah", self.locations)
             }
         }
     }

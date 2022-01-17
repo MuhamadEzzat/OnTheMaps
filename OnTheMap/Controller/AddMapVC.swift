@@ -18,8 +18,6 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
     let firstname      = UserDefaults.standard.string(forKey: "firstname")
     let secondname     = UserDefaults.standard.string(forKey: "secondname")
     let uniqueKey      = UserDefaults.standard.string(forKey: "uniqueKey")
-    var latitudeMap  = 0.0
-    var longitudeMap = 0.0
     var body : StudentLocationRequest?
     
     override func viewDidLoad() {
@@ -32,32 +30,29 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
     func fillMapview(){
         getCoordinate(addressString: studentAddress ?? "") { coordinates, error in
             
-            self.latitudeMap = coordinates.latitude
-            self.longitudeMap = coordinates.longitude
+          
+            var annotations = [MKPointAnnotation]()
+            
+            let lat = CLLocationDegrees(coordinates.latitude)
+            let long = CLLocationDegrees(coordinates.longitude)
+            
+            self.body = StudentLocationRequest(uniqueKey: self.uniqueKey, firstName: self.firstname, lastName: self.secondname, mapString: self.studentAddress, mediaURL: self.studentLink, latitude: lat, longitude: long)
+            
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
+            let first = self.firstname
+            let last = self.secondname
+            let mediaURL = self.studentLink
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first!) \(last!)"
+            annotation.subtitle = mediaURL
+            
+            annotations.append(annotation)
+            
+            self.mapView.addAnnotations(annotations)
         }
-        var annotations = [MKPointAnnotation]()
-        
-        let lat = CLLocationDegrees(self.latitudeMap)
-        let long = CLLocationDegrees(self.longitudeMap)
-        
-        self.body = StudentLocationRequest(uniqueKey: uniqueKey, firstName: firstname, lastName: secondname, mapString: studentAddress, mediaURL: studentLink, latitude: lat, longitude: long)
-        
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        
-        let first = self.firstname
-        let last = self.secondname
-        let mediaURL = self.studentLink
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = "\(first) \(last)"
-        annotation.subtitle = mediaURL
-        
-        annotations.append(annotation)
-        
-        self.mapView.addAnnotations(annotations)
-        
-        
     }
     
     
@@ -68,25 +63,71 @@ class AddMapVC: UIViewController, MKMapViewDelegate {
         loader.startAnimating()
         geocoder.geocodeAddressString(addressString) { (placemarks, error) in
             if error == nil {
+                
                 if let placemark = placemarks?[0] {
                     let location = placemark.location!
                         
                     completionHandler(location.coordinate, nil)
                     self.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: self.mapView.region.span), animated: true)
                 }
+            }else{
+                let alertController = UIAlertController(title: "Alert!", message: "Location Place is not found!", preferredStyle: .alert)
+
+               let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                    UIAlertAction in
+                    NSLog("OK Pressed")
+                }
+                
+                alertController.addAction(okAction)
+
+                self.present(alertController, animated: true, completion: nil)
+
             }
                 
             completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
             self.loader.stopAnimating()
         }
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
 
     @IBAction func finishBtn(_ sender: Any) {
-        OTMClient.postNewMapAnnotation(studentbody: self.body!) { check, error in
-            if check == true{
-                print("horraaay")
+        if currentReachabilityStatus == .notReachable{
+            let alertController = UIAlertController(title: "Alert!", message: "No connectcion", preferredStyle: .alert)
+
+           let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                UIAlertAction in
+                NSLog("OK Pressed")
+            }
+            
+            alertController.addAction(okAction)
+
+            self.present(alertController, animated: true, completion: nil)
+        }else{
+            OTMClient.postNewMapAnnotation(studentbody: self.body!) { check, error in
+                if check == true{
+                    print("horraaay")
+                }
             }
         }
+        
     }
 
 }
